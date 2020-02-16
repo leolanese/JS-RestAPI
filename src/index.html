@@ -54,12 +54,12 @@
 				               <li> User Address : ${city}, ${street} </li>
 				            </ul>
 
-										<div class="mediaResult">
-										  <div class="image"><img src="https://placehold.it/150x250" alt="placeholder"></div>
-										  <div class="content">This is the content of my media object. Items directly inside the flex container will be aligned to flex-start.</div>
-										</div>
-								</div>
-								`;
+						<div class="mediaResult">
+							 <div class="image"><img src="https://placehold.it/150x250" alt="placeholder"></div>
+							<div class="content">This is the content of my media object. Items directly inside the flex container will be aligned to flex-start.</div>
+						</div>
+						</div>
+						`;
 
 						});
 
@@ -97,13 +97,12 @@
 			}
 
 			async function getAPIDapa(){
-				await fetch(restAPI)
+				await fetch(restAPI, {mode: 'cors'})
 					.then((res) => {
 						const contentType = res.headers.get( 'content-type' );
-						const totalCount  = res.headers.get( 'x-wp-total' );
-						const pages       = res.headers.get( 'x-wp-totalpages' );
+						const status      = res.status;
 
-						if ( contentType && contentType.includes( 'application/json' ) ) {
+						if ( contentType && contentType.includes('application/json') && status === 200) {
 							console.table(res);
 							return res.json()
 						}
@@ -114,6 +113,10 @@
 
 							template(result, users)
 					})
+					.catch(function(error) {
+						console.log('Request failed', error);
+						throw new TypeError( 'Format is not standard JSON.' );
+					});
 			}
 		</script>
 
