@@ -34,24 +34,32 @@
 			console.log('url :', url);
 
 
-			function template(result, user) {
-					if (!!user['name']) {
-						console.table(user);
-						const { id, name, email, address: { city, street } } = user;
+			function template(result, users) {
+				console.table(users);
 
-						result +=
-							`<div>
-	             <h5> User ID: ${id} </h5>
-	             <ul class="w3-ul">
-	                 <li> User Full Name : ${name}</li>
-	                 <li> User Email : ${email} </li>
-	                 <li> User Address : ${city}, ${street} </li>
-	             </ul>
-	          </div>`;
-						document.getElementById('result').innerHTML = result;
+				if (!!users) {
+
+						users.forEach((user) => {
+							const { id, name, email, address: { city, street } } = user;
+
+							result +=
+								`<div>
+		             <h5> User ID: ${id} </h5>
+		             <ul class="w3-ul">
+		                 <li> User Full Name : ${name}</li>
+		                 <li> User Email : ${email} </li>
+		                 <li> User Address : ${city}, ${street} </li>
+		             </ul>
+		          </div>`;
+
+						});
+
 					}  else {
-							html += '<div class="col"><h2>Not values found</h2></div>';
+					  	result += '<div class="col"><h2>Not values found</h2></div>';
 					}
+
+				  document.getElementById('result').innerHTML = result;
+
 			}
 
 			async function getLocalData() {
@@ -92,12 +100,10 @@
 						}
 						throw new TypeError( 'Format is not standart JSON.' );
 					})
-					.then((data) => {
+					.then((users) => {
 						let result = `<h2> Random User Info From Jsonplaceholder API</h2>`;
 
-						data.forEach((user) => {
-							template(result, user)
-						});
+							template(result, users)
 					})
 			}
 		</script>
