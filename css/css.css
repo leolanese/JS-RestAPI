@@ -344,3 +344,29 @@ input[type=checkbox].w3-check:disabled+.w3-validate,input[type=radio].w3-radio:d
 .w3-border-dark-grey,.w3-hover-border-dark-grey:hover,.w3-border-dark-gray,.w3-hover-border-dark-gray:hover{border-color:#616161!important}
 .w3-border-pale-red,.w3-hover-border-pale-red:hover{border-color:#ffe7e7!important}.w3-border-pale-green,.w3-hover-border-pale-green:hover{border-color:#e7ffe7!important}
 .w3-border-pale-yellow,.w3-hover-border-pale-yellow:hover{border-color:#ffffcc!important}.w3-border-pale-blue,.w3-hover-border-pale-blue:hover{border-color:#e7ffff!important}
+.mediaResult {
+    display: flex;
+    align-items: flex-start;
+    margin: 1em;
+}
+.mediaResult .content {
+    flex: 1;
+    padding: 10px;
+}
+.wrapper {
+    display: flex;
+}
+.wrapper input[type="text"] {
+    flex: 1 1 auto;
+}
+.searchInput {
+    margin: 1em;
+    border: none;
+    line-height: 1;
+}
+.searchInput input {
+    margin: 0;
+    font-size: 1.2em;
+    font-weight: normal;
+    padding: 10px;
+}

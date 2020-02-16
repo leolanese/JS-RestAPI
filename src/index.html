@@ -11,8 +11,11 @@
 
 	<body>
 		<div class="w3-container">
+			<form class="searchInput">
+				<div class="wrapper"><input type="text" id="text"><input type="submit" value="Send"></div>
+			</form>
 
-			<input type="submit" value="GET DATA FROM LOCAL" id="getLocalData" class="w3-btn w3-white w3-border w3-border-blue w3-margin">
+			<input type="submit" value="GET DATA FROM LOCAL" id="getLocalData" class="w3-btn w3-white w3-border w3-border-red w3-margin">
 			<input type="submit" value="GET DATA FROM API" id="getAPIDapa" class="w3-btn w3-blue w3-margin">
 			<p id="result"></p>
 		</div>
@@ -43,14 +46,20 @@
 							const { id, name, email, address: { city, street } } = user;
 
 							result +=
-								`<div>
-		             <h5> User ID: ${id} </h5>
-		             <ul class="w3-ul">
-		                 <li> User Full Name : ${name}</li>
-		                 <li> User Email : ${email} </li>
-		                 <li> User Address : ${city}, ${street} </li>
-		             </ul>
-		          </div>`;
+								`<div class="w3-panel w3-leftbar w3-border w3-round-small w3-border-blue w3-margin">
+				            <h3> User ID: ${id} </h3>
+				            <ul class="w3-ul">
+				               <li> User Full Name : ${name}</li>
+				               <li> User Email : ${email} </li>
+				               <li> User Address : ${city}, ${street} </li>
+				            </ul>
+
+										<div class="mediaResult">
+										  <div class="image"><img src="https://placehold.it/150x250" alt="placeholder"></div>
+										  <div class="content">This is the content of my media object. Items directly inside the flex container will be aligned to flex-start.</div>
+										</div>
+								</div>
+								`;
 
 						});
 
