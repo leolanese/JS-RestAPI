@@ -18,29 +18,44 @@
 		</div>
 
 		<script>
+			<!-- event binders -->
 			document.getElementById('getLocalData').addEventListener('click', getLocalData);
 			document.getElementById('getAPIDapa').addEventListener('click', getAPIDapa);
 
 			const restUrl  = '../mocks/sampleUser.json';
 			const restAPI = 'https://jsonplaceholder.typicode.com/users';
 
-			function template(result, user) {
-				const { id, name, email, address: { city, street } } = user;
+			const path = 'https://api.themoviedb.org/3/movie/550?',
+						key = 'api_key=b25196cb6ea1946dc9e8fd6c3ddbe0a9',
+						options = '&sort_by=vote_average.desc',
+						extraOptions = '&include_video=true',
+						provider = '&query=';
+			const url = path + key + options + extraOptions;
+			console.log('url :', url);
 
-				result +=
-					`<div>
-             <h5> User ID: ${id} </h5>
-             <ul class="w3-ul">
-                 <li> User Full Name : ${name}</li>
-                 <li> User Email : ${email} </li>
-                 <li> User Address : ${city}, ${street} </li>
-             </ul>
-          </div>`;
-				document.getElementById('result').innerHTML = result;
+
+			function template(result, user) {
+					if (!!user['name']) {
+						console.table(user);
+						const { id, name, email, address: { city, street } } = user;
+
+						result +=
+							`<div>
+	             <h5> User ID: ${id} </h5>
+	             <ul class="w3-ul">
+	                 <li> User Full Name : ${name}</li>
+	                 <li> User Email : ${email} </li>
+	                 <li> User Address : ${city}, ${street} </li>
+	             </ul>
+	          </div>`;
+						document.getElementById('result').innerHTML = result;
+					}  else {
+							html += '<div class="col"><h2>Not values found</h2></div>';
+					}
 			}
 
-			function getLocalData() {
-				fetch (restUrl)
+			async function getLocalData() {
+				await fetch (restUrl)
 					.then (function (res) {
 						console.table (res);
 						return res.json ();
@@ -64,8 +79,8 @@
 					})
 			}
 
-			function getAPIDapa(){
-				fetch(restAPI)
+			async function getAPIDapa(){
+				await fetch(restAPI)
 					.then((res) => {
 						const contentType = res.headers.get( 'content-type' );
 						const totalCount  = res.headers.get( 'x-wp-total' );
